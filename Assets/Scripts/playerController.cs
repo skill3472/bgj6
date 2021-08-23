@@ -67,11 +67,15 @@ public class playerController : MonoBehaviour
 
             if (hit.collider != null)
             {
-                Debug.DrawLine(transform.position, hit.point, Color.white, 0.2f);
+                
                 if (hit.transform.gameObject.CompareTag("Enemy"))
                 {
+                    Debug.DrawLine(transform.position, hit.point, Color.red, 0.2f);
                     GameObject hitEnemy = hit.transform.gameObject;
                     hitEnemy.GetComponent<enemyManager>().GetDamage(weaponDamage);
+                } else
+                {
+                    Debug.DrawLine(transform.position, hit.point, Color.white, 0.2f);
                 }
             }
         }
