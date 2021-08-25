@@ -23,6 +23,8 @@ public class playerController : MonoBehaviour
     public float healthRegen;
     public float maxHealth;
     private float nextRegen;
+    [Space]
+    public SpriteRenderer model;
 
 
     // Start is called before the first frame update
@@ -36,6 +38,10 @@ public class playerController : MonoBehaviour
     {
         rb.velocity = rawInputMovement * movementSpeed * Time.deltaTime;
         HealthRegenCheck();
+        if (crosshair.transform.localPosition.x > 0)
+            model.flipX = true;
+        else if(crosshair.transform.localPosition.x < 0)
+            model.flipX = false;
     }
 
     public void OnMovement(InputAction.CallbackContext value)
