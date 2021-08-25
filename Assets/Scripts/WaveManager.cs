@@ -28,7 +28,11 @@ public class WaveManager : MonoBehaviour
         if(isCooldown) timeToNextWave -= Time.deltaTime;
         if(enemiesAlive.Count == 0)
         {
-            if (!isCooldown) isCooldown = true;
+            if (!isCooldown)
+            {
+                isCooldown = true;
+                GameObject.Find("Canvas").GetComponent<UIManager>().lvlUpWindow.SetActive(true);
+            }
             EndOfWave(); 
         }
     }

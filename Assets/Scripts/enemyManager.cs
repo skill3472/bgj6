@@ -7,7 +7,7 @@ public class enemyManager : MonoBehaviour
     public Transform player;
     private GameObject gm;
     [Header("Stats")]
-    public int health;
+    public float health;
     public float range;
     public float damage;
     public float attackRate;
@@ -27,7 +27,7 @@ public class enemyManager : MonoBehaviour
         CheckForPlayer(player);
     }
 
-    public void GetDamage(int value)
+    public void GetDamage(float value)
     {
         health -= value;
         if(health <= 0)

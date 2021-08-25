@@ -14,7 +14,7 @@ public class playerController : MonoBehaviour
     [Space]
     [Header("Shooting")]
     public Transform weapon;
-    public int weaponDamage;
+    public float weaponDamage;
     public float fireRate;
     private float nextFire;
     [Space]
