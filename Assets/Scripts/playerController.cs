@@ -91,14 +91,15 @@ public class playerController : MonoBehaviour
 
     private void HealthRegenCheck()
     {
-        if (Time.time > nextRegen && health <= maxHealth - 5)
+        nextRegen -= Time.deltaTime;
+        if (nextRegen <= 0 && health <= maxHealth - 5)
         {
-            nextRegen = Time.time + nextRegen;
             health += 5;
-        } else if(Time.time > nextRegen && health < maxHealth && health > maxHealth - 5)
+            nextRegen = healthRegen;
+        } else if(nextRegen <= 0 && health < maxHealth && health > maxHealth - 5)
         {
-            nextRegen = Time.time + nextRegen;
             health = maxHealth;
+            nextRegen = healthRegen;
         }
     }
 
