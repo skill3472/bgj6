@@ -17,17 +17,25 @@ public class playerController : MonoBehaviour
     public int weaponDamage;
     public float fireRate;
     private float nextFire;
+    [Space]
+    [Header("Stats")]
+    public float health;
+    public float healthRegen;
+    public float maxHealth;
+    private float nextRegen;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        health = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
         rb.velocity = rawInputMovement * movementSpeed * Time.deltaTime;
+        HealthRegenCheck();
     }
 
     public void OnMovement(InputAction.CallbackContext value)
@@ -70,16 +78,16 @@ public class playerController : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext value)
     {
-        if(Time.time > nextFire)
+        if (Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            Vector3 targetDirection = (crosshair.transform.position - transform.position)*2;
+            Vector3 targetDirection = (crosshair.transform.position - transform.position) * 2;
 
             RaycastHit2D hit = Physics2D.Raycast(crosshair.transform.position, targetDirection);
 
             if (hit.collider != null)
             {
-                
+
                 if (hit.transform.gameObject.CompareTag("Enemy"))
                 {
                     Debug.DrawLine(transform.position, hit.point, Color.red, 0.2f);
@@ -91,5 +99,33 @@ public class playerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void HealthRegenCheck()
+    {
+        if (Time.time > nextRegen && health <= maxHealth - 5)
+        {
+            nextRegen = Time.time + nextRegen;
+            health += 5;
+        } else if(Time.time > nextRegen && health < maxHealth && health > maxHealth - 5)
+        {
+            nextRegen = Time.time + nextRegen;
+            health = maxHealth;
+        }
+    }
+
+    public void DamagePlayer(float value)
+    {
+        health -= value;
+        if(health <= 0)
+        {
+            PlayerDeath();
+        }
+    }
+
+    private void PlayerDeath()
+    {
+        //Insert some particles, sounds (?) and future death screen here
+        Destroy(gameObject);
     }
 }
