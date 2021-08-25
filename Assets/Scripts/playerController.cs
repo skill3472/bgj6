@@ -59,7 +59,9 @@ public class playerController : MonoBehaviour
 
     public void OnAimMouse(InputAction.CallbackContext value)
     {
-        crosshair.transform.position = Camera.main.ScreenToWorldPoint(value.ReadValue<Vector2>());
+        Vector2 inputAim = Camera.main.ScreenToWorldPoint(value.ReadValue<Vector2>());
+        Vector2 aim = new Vector3(inputAim.x, inputAim.y, 0);
+        crosshair.transform.position = aim;
     }
 
     public void OnShoot(InputAction.CallbackContext value)
