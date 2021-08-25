@@ -5,6 +5,7 @@ using UnityEngine;
 public class enemyManager : MonoBehaviour
 {
     public Transform player;
+    private GameObject gm;
     [Header("Stats")]
     public int health;
     public float range;
@@ -15,7 +16,9 @@ public class enemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(gm == null) gm = GameObject.Find("_GM");
+        if(player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
+
     }
 
     // Update is called once per frame
@@ -36,6 +39,7 @@ public class enemyManager : MonoBehaviour
     private void Death()
     {
         Debug.Log("Enemy died");
+        gm.GetComponent<WaveManager>().enemiesAlive.Remove(gameObject);
         Destroy(gameObject);
     }
 
