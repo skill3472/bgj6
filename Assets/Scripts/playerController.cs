@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class playerController : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class playerController : MonoBehaviour
     private float nextRegen;
     [Space]
     public SpriteRenderer model;
+    public Slider hpSlider;
     private AudioManager am;
 
 
@@ -38,6 +40,8 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        hpSlider.value = health;
+        hpSlider.maxValue = maxHealth;
         rb.velocity = rawInputMovement * movementSpeed * Time.deltaTime;
         HealthRegenCheck();
         if (crosshair.transform.localPosition.x > 0)
