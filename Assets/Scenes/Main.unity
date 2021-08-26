@@ -1377,7 +1377,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixerGroup: {fileID: 0}
-  sounds: []
+  sounds:
+  - name: Hit
+    clip: {fileID: 8300000, guid: ac26a1491cff92744be7b04b44a54a1b, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Shoot
+    clip: {fileID: 8300000, guid: 674f2a548fd55734f95f33d89e8838ba, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
 --- !u!4 &1259752579
 Transform:
   m_ObjectHideFlags: 0

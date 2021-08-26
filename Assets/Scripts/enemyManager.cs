@@ -12,13 +12,14 @@ public class enemyManager : MonoBehaviour
     public float damage;
     public float attackRate;
     private float nextAttack;
+    private AudioManager am;
 
     // Start is called before the first frame update
     void Start()
     {
         if(gm == null) gm = GameObject.Find("_GM");
         if(player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
-
+        if (am == null) am = gm.GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -29,6 +30,7 @@ public class enemyManager : MonoBehaviour
 
     public void GetDamage(float value)
     {
+        am.Play("Hit");
         health -= value;
         if(health <= 0)
         {

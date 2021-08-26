@@ -25,11 +25,13 @@ public class playerController : MonoBehaviour
     private float nextRegen;
     [Space]
     public SpriteRenderer model;
+    private AudioManager am;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        if (am == null) am = GameObject.Find("_GM").GetComponent<AudioManager>();
         health = maxHealth;
     }
 
@@ -74,6 +76,7 @@ public class playerController : MonoBehaviour
     {
         if (Time.time > nextFire)
         {
+            am.Play("Shoot");
             nextFire = Time.time + fireRate;
             Vector3 targetDirection = crosshair.transform.position - transform.position;
 
