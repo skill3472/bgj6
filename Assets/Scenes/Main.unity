@@ -1536,7 +1536,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea93caf48ac02404080dabf8166920e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: []
+  particles:
+  - name: Spark
+    prefab: {fileID: 3263501059342269461, guid: 41b7ec5933b408f4daa7c8d0cd4ab0a2, type: 3}
+    time: 2
 --- !u!1 &1288913595
 GameObject:
   m_ObjectHideFlags: 0

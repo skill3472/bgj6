@@ -14,6 +14,7 @@ public class enemyManager : MonoBehaviour
     private float nextAttack;
     private AudioManager am;
     private float lastX;
+    private ParticleManager pm;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class enemyManager : MonoBehaviour
         if(gm == null) gm = GameObject.Find("_GM");
         if(player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
         if (am == null) am = gm.GetComponent<AudioManager>();
+        if (pm == null) pm = gm.GetComponent<ParticleManager>();
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class enemyManager : MonoBehaviour
     public void GetDamage(float value)
     {
         am.Play("Hit");
+        pm.Spawn("Spark", transform.position, Quaternion.Euler(90,0,0));
         health -= value;
         if(health <= 0)
         {
