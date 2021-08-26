@@ -13,6 +13,7 @@ public class enemyManager : MonoBehaviour
     public float attackRate;
     private float nextAttack;
     private AudioManager am;
+    private float lastX;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,8 @@ public class enemyManager : MonoBehaviour
     void Update()
     {
         CheckForPlayer(player);
+        if (transform.position.x < player.position.x) gameObject.GetComponentInChildren<SpriteRenderer>().flipX = true;
+        else gameObject.GetComponentInChildren<SpriteRenderer>().flipX = false;
     }
 
     public void GetDamage(float value)
