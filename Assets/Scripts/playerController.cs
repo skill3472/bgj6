@@ -29,12 +29,29 @@ public class playerController : MonoBehaviour
     public Slider hpSlider;
     private AudioManager am;
 
+    [SerializeField] private List<Sprite> standingSprites;
+    [SerializeField] private List<Sprite> movementSprites;
+    private List<Sprite> currentList;
+    private int framesCount = 0;
+    private int animationFrame = 0;
+    private float animationSpeed = 0.25f;
+    private float nextFrame = 0;
+
+    enum MovementState
+    {
+        Standing,
+        Moving,
+    }
+
+    private MovementState movementState = MovementState.Standing;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         if (am == null) am = GameObject.Find("_GM").GetComponent<AudioManager>();
         health = maxHealth;
+        currentList = standingSprites;
     }
 
     // Update is called once per frame
@@ -43,11 +60,63 @@ public class playerController : MonoBehaviour
         hpSlider.value = health;
         hpSlider.maxValue = maxHealth;
         rb.velocity = rawInputMovement * movementSpeed * Time.deltaTime;
+        
+        
+        if (rb.velocity.sqrMagnitude > 0.1f && movementState == MovementState.Standing)
+        {
+            SwitchMovementState(MovementState.Moving);
+        }
+        else if (rb.velocity.sqrMagnitude <= 0.1f && movementState == MovementState.Moving)
+        {
+            SwitchMovementState(MovementState.Standing);
+        }
+        
+        AnimateModel();
+        
         HealthRegenCheck();
         if (crosshair.transform.localPosition.x > 0)
             model.flipX = true;
         else if(crosshair.transform.localPosition.x < 0)
             model.flipX = false;
+    }
+
+    private void SwitchMovementState(MovementState newMovementState)
+    {
+        animationFrame = 0;
+        nextFrame = Time.time + animationSpeed;
+        print("switch state!");
+        switch (newMovementState)
+        {
+            case MovementState.Moving:
+            {
+                currentList = movementSprites;
+                break;
+            }
+            case MovementState.Standing:
+            {
+                currentList = standingSprites;
+                break;
+            }
+        }
+        model.sprite = currentList[animationFrame];
+        framesCount = currentList.Count;
+
+        movementState = newMovementState;
+    }
+    
+    private void AnimateModel()
+    {
+        if (Time.time > nextFrame)
+        {
+            print("next frame!");
+            nextFrame = Time.time + animationSpeed;
+            animationFrame += 1;
+            if (animationFrame >= framesCount)
+            {
+                animationFrame = 0;
+            }
+            model.sprite = currentList[animationFrame];
+        }
     }
 
     public void OnMovement(InputAction.CallbackContext value)

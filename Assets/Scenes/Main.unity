@@ -2549,6 +2549,11 @@ MonoBehaviour:
   maxHealth: 100
   model: {fileID: 1418724906}
   hpSlider: {fileID: 725108025}
+  standingSprites:
+  - {fileID: 21300000, guid: 63fab52c7e0602044885ace928dc7393, type: 3}
+  movementSprites:
+  - {fileID: 21300000, guid: 33038b16453e45e47a5e28f40ca54f61, type: 3}
+  - {fileID: 21300000, guid: da09c51dddb8aa34a81f3086effd1542, type: 3}
 --- !u!114 &2043556949
 MonoBehaviour:
   m_ObjectHideFlags: 0
