@@ -28,6 +28,7 @@ public class playerController : MonoBehaviour
     public SpriteRenderer model;
     public Slider hpSlider;
     private AudioManager am;
+    private ParticleManager pm;
 
     [SerializeField] private List<Sprite> standingSprites;
     [SerializeField] private List<Sprite> movementSprites;
@@ -50,6 +51,7 @@ public class playerController : MonoBehaviour
     void Start()
     {
         if (am == null) am = GameObject.Find("_GM").GetComponent<AudioManager>();
+        if (pm == null) pm = GameObject.Find("_GM").GetComponent<ParticleManager>();
         health = maxHealth;
         currentList = standingSprites;
     }
@@ -152,6 +154,7 @@ public class playerController : MonoBehaviour
             am.Play("Shoot");
             nextFire = Time.time + fireRate;
             Vector3 targetDirection = crosshair.transform.position - transform.position;
+            pm.Spawn("Burst", transform.position, Quaternion.Euler(targetDirection.x, targetDirection.y, 0));
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDirection);
 

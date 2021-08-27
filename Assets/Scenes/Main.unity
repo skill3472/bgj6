@@ -1408,6 +1408,9 @@ MonoBehaviour:
   - name: Spark
     prefab: {fileID: 3263501059342269461, guid: 41b7ec5933b408f4daa7c8d0cd4ab0a2, type: 3}
     time: 2
+  - name: Burst
+    prefab: {fileID: 28583700543755571, guid: 7ee12ae4f1b8f4f40b78de7db2afb2e3, type: 3}
+    time: 1
 --- !u!1 &1288913595
 GameObject:
   m_ObjectHideFlags: 0
