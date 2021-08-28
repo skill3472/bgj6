@@ -51,6 +51,7 @@ public class playerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        am.Play("OST");
         if (am == null) am = GameObject.Find("_GM").GetComponent<AudioManager>();
         if (pm == null) pm = GameObject.Find("_GM").GetComponent<ParticleManager>();
         if (um == null) um = GameObject.Find("Canvas").GetComponent<UIManager>();
