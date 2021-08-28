@@ -29,6 +29,7 @@ public class playerController : MonoBehaviour
     public Slider hpSlider;
     private AudioManager am;
     private ParticleManager pm;
+    private UIManager um;
 
     [SerializeField] private List<Sprite> standingSprites;
     [SerializeField] private List<Sprite> movementSprites;
@@ -52,6 +53,7 @@ public class playerController : MonoBehaviour
     {
         if (am == null) am = GameObject.Find("_GM").GetComponent<AudioManager>();
         if (pm == null) pm = GameObject.Find("_GM").GetComponent<ParticleManager>();
+        if (um == null) um = GameObject.Find("Canvas").GetComponent<UIManager>();
         health = maxHealth;
         currentList = standingSprites;
     }
@@ -200,6 +202,7 @@ public class playerController : MonoBehaviour
     private void PlayerDeath()
     {
         //Insert some particles, sounds (?) and future death screen here
+        um.GameOver();
         Destroy(gameObject);
     }
 }
